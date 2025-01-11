@@ -1,0 +1,32 @@
+<h1><%= @post.user.name %>'s Post</h1>
+
+<% if current_user == @post.user %>
+  <%= link_to 'Edit Post', edit_post_path(@post), class: 'edit-link' %>
+<% end %>
+
+<p><%= @post.content %></p>
+
+<% if @post.image.present? %>
+  <img src="<%= @post.image %>" alt="Post Image" />
+<% end %>
+
+<h2>Comments</h2>
+
+<% @comments.each do |comment| %>
+  <div class="comment">
+    <p>
+      <strong><%= comment.user.name %></strong> 
+      <span>(<%= comment.created_at.strftime("%B %d, %Y at %I:%M %p") %>)</span>
+    </p>
+    <p><%= comment.content %></p>
+    
+    <%= render 'comments/comments', comment: comment %> <!-- Render nested comments -->
+    
+    <% if current_user == comment.user %>
+      <%= link_to 'Edit', edit_post_comment_path(@post, comment) %> |
+      <%= link_to 'Delete', post_comment_path(@post, comment), method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
+  </div>
+<% end %>
+
+

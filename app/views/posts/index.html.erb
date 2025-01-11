@@ -1,0 +1,11 @@
+<h1>All Posts</h1>
+
+<% @posts.each do |post| %>
+  <div class="post">
+    <h2><%= post.user.name %></h2>
+    <p><%= post.content %></p>
+    <%= link_to 'View', post_path(post) %>
+  </div>
+<% end %>
+
+<%= link_to 'New Post', new_post_path %>
