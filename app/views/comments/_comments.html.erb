@@ -1,0 +1,11 @@
+<% comment.child_comments.each do |reply| %>
+  <div class="comment reply">
+    <p><strong><%= reply.user.name %></strong>: <%= reply.content %></p>
+    <%= render 'comments/comments', comment: reply %> <!-- Nested replies -->
+  </div>
+<% end %>
+
+<%= form_with model: [ comment.post, Comment.new(parent_id: comment.id) ], local: true do |form| %>
+  <%= form.text_area :content, placeholder: "Reply to this comment..." %>
+  <%= form.submit "Reply" %>
+<% end %>
