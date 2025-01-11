@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   
   root to: 'posts#index'
 
+  resources :users, only: [:show] # Add route for profile page
+
    # Resources for posts, including nested comments
    resources :posts do
     # Nested resource for comments on posts

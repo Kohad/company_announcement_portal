@@ -8,10 +8,6 @@ class PostsController < ApplicationController
   
   # Display a single post and its comments
   def show
-    # @post = Post.find(params[:id])
-    # @comment = Comment.new
-    # @comments = @post.comments.top_level_comments
-    
     @post = Post.find(params[:id])
     @comments = @post.comments.includes(:user)
     @comment = @post.comments.build
